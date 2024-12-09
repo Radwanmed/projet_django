@@ -1,71 +1,167 @@
+@import url('https://fonts.googleapis.com/css2?family=Yanone+Kaffeesatz:wght@200;300;400;500&display=swap');
+
+:root{
+    --red:#ff1a1a;
+}
+
 *{
-    margin: 0;
-    padding: 0;
+    font-family: 'Yanone Kaffeesatz', sans-serif;
+    margin:0; padding:0;
     box-sizing: border-box;
-    font-family: "popipins",sans-serif;
-}
-    
-
-/*la couler de body*/
-body{
-    background-color: #101010;
-}
-
-
-
-
-.logo{
-  
-    color: #ff7200;
-    font-size: 35px;
-    font-family: Arial;
-    padding-left: 20px;
-    float: left;
-   padding-top: 10px; 
-
-
-}
- 
-.menu{
-
-    width: 400px;
-    float: left;
-    height: 70px;
-    padding-left: 150px;
-    
-}
-
-
-
-
-ul{
-    float: left;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-}
-ul li{
-    list-style: none;
-    margin-left:62px ;
-    margin-top: 27px;
-    font-size: 20px;
-}
-
-ul li a{
     text-decoration: none;
-    color: #fff;
-    font-family:Helvetica;
-    font-weight: bold;
-    transition: 0.4s ease-in-out;
+    outline: none;
+    border:none;
+    transition: all .3s cubic-bezier(.16,.8,.62,1.52);
+    text-transform: capitalize;
+    font-weight: normal;
 }
 
-ul li a:hover{
-
-    color: #ff7200;
+*::selection{
+    background:var(--red);
+    color:#fff;
 }
 
+html{
+    font-size: 62.5%;
+    overflow-x: hidden;
+}
 
+body{
+    overflow-x: hidden;
+}
 
+html::-webkit-scrollbar{
+    width:1.3rem;
+}
+
+html::-webkit-scrollbar-track{
+    background:#000;
+}
+
+html::-webkit-scrollbar-thumb{
+    background:var(--red);
+}
+
+section{
+    min-height: 100vh;
+    padding:0 7%;
+    padding-top: 11rem;
+}
+
+.btn{
+    display: inline-block;
+    padding:.7rem 4rem;
+    font-size: 2rem;
+    color:#fff;
+    background:var(--red);
+    padding-top: 1rem;
+    margin-top: 1rem;
+}
+
+.btn:hover{
+    transform:scale(1.02);
+}
+
+.heading{
+    text-align: center;
+    color:var(--red);
+    text-transform: uppercase;
+    font-size: 4rem;
+}
+
+.heading span{
+    color:#666;
+}
+
+header{
+    position:relative;
+    top:2.5rem; left:50%;
+    transform:translateX(-50%);
+    width:93%;
+    z-index: 1000;
+    background:#fff;
+    box-shadow: 0 .5rem 1rem rgba(0,0,0,.1);
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding:2rem 3rem;
+    border-radius: .5rem;
+}
+
+header .logo{
+    color:#333;
+    font-size: 2.5rem;
+}
+
+header .logo span{
+    color:var(--red);
+}
+
+header .navbar ul{
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    list-style: none;
+}
+
+header .navbar ul li{
+    margin-left: 3rem;
+}
+
+header .navbar ul li a{
+   font-size: 2rem;
+   color:#333;
+}
+
+header .navbar ul li a.active,
+header .navbar ul li a:hover{
+    color:var(--red);
+}
+
+#menu{
+    font-size: 3rem;
+    color:#666;
+    cursor: pointer;
+    display: none;
+}
+
+.footer{
+    text-align: center;
+    background:#222;
+}
+
+.footer .share{
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-wrap: wrap;
+    padding:2rem 0;
+}
+
+.footer .share a{
+    font-size: 2rem;
+    color:#ccc;
+    padding:2rem;
+}
+
+.footer .share a:hover{
+    color:#eee;
+}
+
+.footer a:hover{
+    text-decoration: underline;
+}
+
+.footer .credit{
+    padding:2rem 1rem;
+    font-size: 3rem;
+    color:#fff;
+    background:#111;
+}
+
+.footer .credit a{
+    color:var(--red);
+}
 
 /*la grande div de calendier*/
 .contrainer{
@@ -111,7 +207,7 @@ color:rgb(245, 244, 244);
     gap: 20px;
 }
 
-.calendar .header .btns .btn{
+.calendar .header .btns .btne{
     width: 50px;
     height: 40px;
     display: flex;
@@ -126,7 +222,7 @@ color:rgb(245, 244, 244);
 
 }
 
-.calendar .header .btns .btn:hover{
+.calendar .header .btns .btne:hover{
 
     background-color: #040404;
     transform: scale(1.05);
