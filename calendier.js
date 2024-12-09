@@ -27,10 +27,25 @@ document.addEventListener("DOMContentLoaded", function () {
                 body: JSON.stringify({ event_date: date, details }),
             });
             const result = await response.json();
-            console.log("Résultat de l'ajout d'événement:", result);
             return result;
         } catch (error) {
             console.error("Erreur lors de l'ajout de l'événement:", error);
+            return { status: "error" };
+        }
+    }
+
+    // Modifier un événement dans MySQL
+    async function updateEvent(date, details) {
+        try {
+            const response = await fetch("events.php", {
+                method: "PUT",
+                headers: { "Content-Type": "application/json" },
+                body: JSON.stringify({ event_date: date, details }),
+            });
+            const result = await response.json();
+            return result;
+        } catch (error) {
+            console.error("Erreur lors de la modification de l'événement:", error);
             return { status: "error" };
         }
     }
@@ -41,30 +56,12 @@ document.addEventListener("DOMContentLoaded", function () {
             const response = await fetch("events.php", {
                 method: "DELETE",
                 headers: { "Content-Type": "application/x-www-form-urlencoded" },
-                body: event_date=`${encodeURIComponent(date)}`,
+                body: `event_date=${encodeURIComponent(date)}`,
             });
             const result = await response.json();
-            console.log("Résultat de la suppression d'événement:", result);
             return result;
         } catch (error) {
             console.error("Erreur lors de la suppression de l'événement:", error);
-            return { status: "error" };
-        }
-    }
-
-    // Modifier un événement existant dans MySQL
-    async function updateEvent(date, newDetails) {
-        try {
-            const response = await fetch("events.php", {
-                method: "PUT",
-                headers: { "Content-Type": "application/json" },
-                body: JSON.stringify({ event_date: date, details: newDetails }),
-            });
-            const result = await response.json();
-            console.log("Résultat de la mise à jour d'événement:", result);
-            return result;
-        } catch (error) {
-            console.error("Erreur lors de la mise à jour de l'événement:", error);
             return { status: "error" };
         }
     }
@@ -89,7 +86,6 @@ document.addEventListener("DOMContentLoaded", function () {
 
         monthElement.textContent = `${months[month]} ${year}`;
 
-        // Récupérer les événements
         const events = await fetchEvents(year, month + 1);
 
         // Ajouter les jours du mois précédent
@@ -141,8 +137,8 @@ document.addEventListener("DOMContentLoaded", function () {
                     <button class="close">&times;</button>
                     <h2>Événement pour le ${date}</h2>
                     <textarea placeholder="Entrez les détails de l'événement..." style="background: #333; color: #fff;">${eventDetails}</textarea>
-                    <button id="saveEvent">${eventDetails ? "Mettre à jour" : "Ajouter"}</button>
-                    ${eventDetails ? `<button id="deleteEvent">Supprimer</button>` : ""}
+                    ${eventDetails ? `<button id="updateEvent">Modifier</button>`  :` <button id="saveEvent">Ajoute</button>`}
+                    ${eventDetails ? `<button id="deleteEvent">Supprimer</button> `: ""}
                 </div>
             </div>
         `;
@@ -153,14 +149,10 @@ document.addEventListener("DOMContentLoaded", function () {
             modal.remove();
         });
 
-        modal.querySelector("#saveEvent").addEventListener("click", async () => {
+        modal.querySelector("#saveEvent")?.addEventListener("click", async () => {
             const details = modal.querySelector("textarea").value.trim();
             if (details) {
-                if (eventDetails) {
-                    await updateEvent(date, details);
-                } else {
-                    await addEvent(date, details);
-                }
+                await addEvent(date, details);
                 modal.remove();
                 await renderCalendar();
             } else {
@@ -168,15 +160,24 @@ document.addEventListener("DOMContentLoaded", function () {
             }
         });
 
-        if (eventDetails) {
-            modal.querySelector("#deleteEvent").addEventListener("click", async () => {
-                if (confirm("Voulez-vous vraiment supprimer cet événement ?")) {
-                    await deleteEvent(date);
-                    modal.remove();
-                    await renderCalendar();
-                }
-            });
-        }
+        modal.querySelector("#updateEvent")?.addEventListener("click", async () => {
+            const details = modal.querySelector("textarea").value.trim();
+            if (details) {
+                await updateEvent(date, details);
+                modal.remove();
+                await renderCalendar();
+            } else {
+                alert("Veuillez entrer des détails pour l'événement.");
+            }
+        });
+
+        modal.querySelector("#deleteEvent")?.addEventListener("click", async () => {
+            if (confirm("Voulez-vous vraiment supprimer cet événement ?")) {
+                await deleteEvent(date);
+                modal.remove();
+                await renderCalendar();
+            }
+        });
     }
 
     prevBtn.addEventListener("click", () => {

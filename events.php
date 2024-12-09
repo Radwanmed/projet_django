@@ -28,21 +28,14 @@ if ($_SERVER['REQUEST_METHOD'] === 'GET') {
     echo json_encode(["success" => true]);
 } elseif ($_SERVER['REQUEST_METHOD'] === 'DELETE') {
     parse_str(file_get_contents("php://input"), $data);
-
-    if (isset($data['id'])) {
-        $stmt = $pdo->prepare("DELETE FROM calendrier WHERE id = :id");
-        $stmt->execute(['id' => $data['id']]);
-    } elseif (isset($data['event_date'])) {
-        $stmt = $pdo->prepare("DELETE FROM calendrier WHERE event_date = :event_date");
-        $stmt->execute(['event_date' => $data['event_date']]);
-    }
+    $stmt = $pdo->prepare("DELETE FROM calendrier WHERE event_date = :event_date");
+    $stmt->execute(['event_date' => $data['event_date']]);
 
     echo json_encode(["success" => true]);
 } elseif ($_SERVER['REQUEST_METHOD'] === 'PUT') {
     $data = json_decode(file_get_contents('php://input'), true);
-
-    $stmt = $pdo->prepare("UPDATE calendrier SET details = :details WHERE id = :id");
-    $stmt->execute(['details' => $data['details'], 'id' => $data['id']]);
+    $stmt = $pdo->prepare("UPDATE calendrier SET details = :details WHERE event_date = :event_date");
+    $stmt->execute(['details' => $data['details'], 'event_date' => $data['event_date']]);
 
     echo json_encode(["success" => true]);
 }
