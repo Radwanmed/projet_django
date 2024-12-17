@@ -7,18 +7,24 @@ document.addEventListener("DOMContentLoaded", function () {
 
     let currentDate = new Date();
 
-    // Charger les événements depuis MySQL
+    // Charger les événements depuis le serveur pour un utilisateur
     async function fetchEvents(year, month) {
         try {
             const response = await fetch(`events.php?year=${year}&month=${month}`);
-            return await response.json();
+            const events = await response.json();
+
+            if (events.error) {
+                console.error("Erreur:", events.error);
+                return [];
+            }
+            return events;
         } catch (error) {
             console.error("Erreur lors de la récupération des événements:", error);
             return [];
         }
     }
 
-    // Ajouter un événement dans MySQL
+    // Ajouter un événement
     async function addEvent(date, details) {
         try {
             const response = await fetch("events.php", {
@@ -26,15 +32,13 @@ document.addEventListener("DOMContentLoaded", function () {
                 headers: { "Content-Type": "application/json" },
                 body: JSON.stringify({ event_date: date, details }),
             });
-            const result = await response.json();
-            return result;
+            return await response.json();
         } catch (error) {
-            console.error("Erreur lors de l'ajout de l'événement:", error);
-            return { status: "error" };
+            console.error("Erreur lors de l'ajout:", error);
         }
     }
 
-    // Modifier un événement dans MySQL
+    // Modifier un événement
     async function updateEvent(date, details) {
         try {
             const response = await fetch("events.php", {
@@ -42,15 +46,13 @@ document.addEventListener("DOMContentLoaded", function () {
                 headers: { "Content-Type": "application/json" },
                 body: JSON.stringify({ event_date: date, details }),
             });
-            const result = await response.json();
-            return result;
+            return await response.json();
         } catch (error) {
-            console.error("Erreur lors de la modification de l'événement:", error);
-            return { status: "error" };
+            console.error("Erreur lors de la mise à jour:", error);
         }
     }
 
-    // Supprimer un événement dans MySQL
+    // Supprimer un événement
     async function deleteEvent(date) {
         try {
             const response = await fetch("events.php", {
@@ -58,15 +60,13 @@ document.addEventListener("DOMContentLoaded", function () {
                 headers: { "Content-Type": "application/x-www-form-urlencoded" },
                 body: `event_date=${encodeURIComponent(date)}`,
             });
-            const result = await response.json();
-            return result;
+            return await response.json();
         } catch (error) {
-            console.error("Erreur lors de la suppression de l'événement:", error);
-            return { status: "error" };
+            console.error("Erreur lors de la suppression:", error);
         }
     }
 
-    // Mettre à jour le calendrier
+    // Mettre à jour et afficher le calendrier
     async function renderCalendar() {
         daysContainer.innerHTML = "";
 
@@ -88,7 +88,7 @@ document.addEventListener("DOMContentLoaded", function () {
 
         const events = await fetchEvents(year, month + 1);
 
-        // Ajouter les jours du mois précédent
+        // Jours du mois précédent
         for (let i = firstDayIndex; i > 0; i--) {
             const dayElement = document.createElement("div");
             dayElement.classList.add("jour", "prev");
@@ -96,7 +96,7 @@ document.addEventListener("DOMContentLoaded", function () {
             daysContainer.appendChild(dayElement);
         }
 
-        // Ajouter les jours du mois courant
+        // Jours du mois actuel
         for (let i = 1; i <= lastDay; i++) {
             const dayElement = document.createElement("div");
             dayElement.classList.add("jour");
@@ -112,21 +112,16 @@ document.addEventListener("DOMContentLoaded", function () {
             if (event) {
                 dayElement.style.backgroundColor = "#4caf50";
                 dayElement.style.color = "#fff";
-
-                dayElement.addEventListener("click", () => {
-                    openModal(fullDate, event.details);
-                });
+                dayElement.addEventListener("click", () => openModal(fullDate, event.details));
             } else {
-                dayElement.addEventListener("click", () => {
-                    openModal(fullDate);
-                });
+                dayElement.addEventListener("click", () => openModal(fullDate));
             }
 
             daysContainer.appendChild(dayElement);
         }
     }
 
-    // Ouvrir une fenêtre modale
+    // Gestion de la fenêtre modale pour les événements
     function openModal(date, eventDetails = "") {
         const modal = document.createElement("div");
         modal.classList.add("modal");
@@ -136,27 +131,23 @@ document.addEventListener("DOMContentLoaded", function () {
                 <div class="modal-content">
                     <button class="close">&times;</button>
                     <h2>Événement pour le ${date}</h2>
-                    <textarea placeholder="Entrez les détails de l'événement..." style="background: #333; color: #fff;">${eventDetails}</textarea>
-                    ${eventDetails ? `<button id="updateEvent">Modifier</button>`  :` <button id="saveEvent">Ajoute</button>`}
-                    ${eventDetails ? `<button id="deleteEvent">Supprimer</button> `: ""}
+                    <textarea placeholder="Entrez les détails de l'événement...">${eventDetails}</textarea>
+                    ${eventDetails ? `<button id="updateEvent">Modifier</button>` : `<button id="saveEvent">Ajouter</button>`}
+                    ${eventDetails ? `<button id="deleteEvent">Supprimer</button>` : ""}
                 </div>
             </div>
         `;
 
         document.body.appendChild(modal);
 
-        modal.querySelector(".close").addEventListener("click", () => {
-            modal.remove();
-        });
+        modal.querySelector(".close").addEventListener("click", () => modal.remove());
 
         modal.querySelector("#saveEvent")?.addEventListener("click", async () => {
             const details = modal.querySelector("textarea").value.trim();
             if (details) {
                 await addEvent(date, details);
                 modal.remove();
-                await renderCalendar();
-            } else {
-                alert("Veuillez entrer des détails pour l'événement.");
+                renderCalendar();
             }
         });
 
@@ -165,17 +156,15 @@ document.addEventListener("DOMContentLoaded", function () {
             if (details) {
                 await updateEvent(date, details);
                 modal.remove();
-                await renderCalendar();
-            } else {
-                alert("Veuillez entrer des détails pour l'événement.");
+                renderCalendar();
             }
         });
 
         modal.querySelector("#deleteEvent")?.addEventListener("click", async () => {
-            if (confirm("Voulez-vous vraiment supprimer cet événement ?")) {
+            if (confirm("Confirmez-vous la suppression ?")) {
                 await deleteEvent(date);
                 modal.remove();
-                await renderCalendar();
+                renderCalendar();
             }
         });
     }
