@@ -1,0 +1,146 @@
+/* Global styling */
+* {
+    font-family: "Poppins", sans-serif;
+    margin: 0;
+    padding: 0;
+}
+
+/* Fond noir pour la page entière */
+html, body {
+    background-color: #000 !important; /* Fond noir pour html et body */
+    color: #fff; /* Texte en blanc pour contraster avec le fond noir */
+    margin: 0;
+    padding: 0;
+    min-height: 100vh; /* S'assure que le fond couvre toute la hauteur de la page */
+}
+
+/* Container styling */
+body .container {
+    max-width: 1100px;
+}
+
+/* Filter buttons */
+#filter-buttons button {
+    border-radius: 3px;
+    background: #fff; /* Fond blanc pour les boutons */
+    border-color: transparent;
+    color: #000; /* Texte en noir pour les boutons */
+}
+
+/* Hover effect for filter buttons */
+#filter-buttons button:hover {
+    background: #ddd; /* Fond gris clair au survol */
+}
+
+/* Active button styling */
+#filter-buttons button.active {
+    color: #fff;
+    background: #d9534f; /* Rouge pour le bouton actif */
+}
+
+/* Image cards styling */
+#filterable-cards .card {
+    width: 15rem;
+    border: 2px solid transparent;
+    background-color: #333; /* Fond gris foncé pour les cartes */
+    color: #fff; /* Texte en blanc pour contraster avec le fond des cartes */
+}
+
+/* Card image styling */
+#filterable-cards .card-img-top {
+    width: 100%;
+    height: 200px; /* Fixe la hauteur des images */
+    object-fit: cover; /* Assure que l'image couvre bien l'espace sans déformation */
+}
+
+/* Hide card when filtering */
+#filterable-cards .card.hide {
+    display: none;
+}
+
+/* Responsive grid */
+@media (max-width: 600px) {
+    #filterable-cards {
+        justify-content: center;
+    }
+
+    #filterable-cards .card {
+        width: calc(100% / 2 - 10px);
+    }
+}
+
+/* Card body styling */
+#filterable-cards .card-body {
+    background-color: #444; /* Fond légèrement plus clair pour les textes */
+    color: #fff;
+    padding: 1rem;
+    gap: 3px;
+    
+}
+
+/* Heading and text styling for albums */
+.album-header h2 {
+    color: #d9534f; /* Rouge pour le titre de l'album */
+    font-size: 2rem;
+}
+
+.album-header p {
+    color: #fff; /* Texte blanc pour la date */
+}
+
+/* Button styling for album images */
+.card-body .btn {
+    background-color: #d9534f; /* Rouge pour les boutons */
+    color: #fff;
+    border: none;
+}
+
+.card-body .btn:hover {
+    background-color: #c9302c; /* Couleur rouge plus foncée au survol */
+}
+
+/* Additional customization for images inside album detail page */
+.card-img-wrapper {
+    overflow: hidden;
+}
+
+/* Styling for icons (if you use icon fonts or SVG icons) */
+i, svg {
+    color: #d9534f !important; /* Rouge pour les icônes */
+}
+
+/* Styliser une icône FontAwesome pour qu'elle soit rouge */
+.row mt-4 {
+    color: red;
+}
+
+/* Style de la barre de recherche */
+input[type="text"] {
+    border-radius: 20px;
+    padding: 10px;
+    border: 1px solid #ccc;
+}
+
+button[type="submit"] {
+    border-radius: 20px;
+    padding: 10px 20px;
+    background-color: #d9534f;
+    color: white;
+    border: none;
+}
+
+button[type="submit"]:hover {
+    background-color: #c9302c;
+}
+
+.filterable-cards {
+    display: flex;
+    flex-wrap: wrap;  /* Permet aux images de passer à la ligne si l'espace est insuffisant */
+    gap: 3px;  /* Espacement minimal entre les images, ajustable */
+    justify-content: center;  /* Centre les images horizontalement */
+    padding: 10px;
+    width: 200px;  /* Largeur des images */
+    height: 150px;  /* Hauteur des images */
+    object-fit: cover;  /* Les images s'adaptent sans déformation */
+    border-radius: 5px; 
+}
