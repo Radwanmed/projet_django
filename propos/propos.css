@@ -1,0 +1,58 @@
+/* Global Styles */
+body {
+    font-family: Arial, sans-serif;
+    margin: 0;
+    padding: 0;
+    background-color:white;
+    color: #333;
+}
+
+h1 {
+    color: #e60000; /* Rouge */
+}
+
+h2,h3,h4 {
+    color: #000;
+    font-family: 'Lucida Sans', 'Lucida Sans Regular', 'Lucida Grande', 'Lucida Sans Unicode', Geneva, Verdana, sans-serif;
+}
+
+a {
+    text-decoration: none;
+    color: #e60000;
+    transition: color 0.3s;
+}
+
+a:hover {
+    color: #000;
+}
+
+header {
+    background-color: #000;
+    color: #fff;
+    padding: 15px 0;
+    text-align: center;
+}
+
+header .logo h1 {
+    margin: 0;
+}
+
+nav ul {
+    list-style-type: none;
+    padding: 0;
+}
+
+nav ul li {
+    display: inline;
+    margin: 0 15px;
+}
+
+.about {
+    background-color: #f4f4f4;
+    padding: 40px;
+    text-align: center;
+}
+
+.about h2 {
+    margin-top: 0;
+}

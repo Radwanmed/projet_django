@@ -1,0 +1,125 @@
+/* Général - Fond de page */
+body {
+    background-color: #333; /* Fond sombre */
+    color: white; /* Texte en blanc */
+    font-family: 'Arial', sans-serif;
+    margin: 0;
+    padding: 0;
+}
+
+/* Centrer le formulaire */
+.form-container {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100vh; /* Prend toute la hauteur de la fenêtre */
+    padding: 15px;
+}
+
+/* Formulaire */
+.signup-form {
+    background-color: #222; /* Fond du formulaire en noir */
+    border-radius: 8px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+    padding: 30px;
+    width: 100%;
+    max-width: 450px; /* Limite la largeur du formulaire */
+}
+
+/* Titre du formulaire */
+.form-title {
+    color: #ff6f00; /* Couleur orange pour le titre */
+    font-size: 2rem; /* Taille du texte */
+    text-align: center;
+    margin-bottom: 30px;
+}
+
+/* Message d'erreur et de succès */
+.alert {
+    text-align: center;
+    font-size: 1rem;
+    margin-bottom: 20px;
+}
+
+/* Champ de saisie */
+.form-group {
+    margin-bottom: 20px;
+}
+
+.form-label {
+    font-size: 1rem;
+    color: white;
+}
+
+.form-control {
+    background-color: #333; /* Fond sombre pour les champs de saisie */
+    border: 1px solid #555; /* Bordure plus claire */
+    color: white; /* Texte en blanc dans les champs */
+    padding: 10px;
+    width: 100%;
+}
+
+.form-control:focus {
+    border-color: #ff6f00; /* Bordure orange quand le champ est actif */
+    background-color: #444; /* Fond plus clair au focus */
+}
+
+/* Bouton de soumission */
+.btn-submit {
+    background-color: #ff6f00; /* Bouton orange */
+    color: white; /* Texte en blanc */
+    border: none;
+    padding: 10px 20px;
+    width: 100%;
+    margin-top: 10px;
+    border-radius: 4px;
+    font-size: 1rem;
+}
+
+.btn-submit:hover {
+    background-color: #e65c00; /* Couleur du bouton au survol */
+}
+
+/* Lien de redirection vers la page de connexion */
+.btn-link {
+    color: #ff6f00; /* Lien orange */
+    display: block;
+    text-align: center;
+    margin-top: 10px;
+    font-size: 1rem;
+}
+
+.btn-link:hover {
+    color: #e65c00; /* Couleur du lien au survol */
+}
+
+/* Responsive Design */
+@media (max-width: 576px) {
+    .form-container {
+        padding: 15px;
+    }
+
+    .signup-form {
+        padding: 20px;
+        width: 100%;
+    }
+
+    .form-title {
+        font-size: 1.5rem;
+    }
+    .admin-button {
+        position: absolute;
+        top: 20px;
+        right: 20px;
+        padding: 10px 15px;
+        background-color: orangered;
+        color: white;
+        text-decoration: none;
+        border-radius: 5px;
+        font-weight: bold;
+    }
+    
+    .admin-button:hover {
+        background-color: orangered;
+    }
+}
