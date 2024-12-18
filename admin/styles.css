@@ -1,0 +1,351 @@
+@import url('https://fonts.googleapis.com/css2?family=Beau+Rivage&family=Open+Sans&family=Poppins:wght@400;700&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Open+Sans&family=Poppins:wght@400;700&family=Roboto&display=swap');
+*
+{
+    padding: 0;
+    margin: 0;
+    box-sizing: border-box;
+    font-family: Poppins, sans-serif;
+}
+body
+{
+    min-height: 100vh;
+    display: flex;
+}
+/*----------- ACCUEIL ---------*/
+#bloc-1
+{
+    display: flex;
+    align-items: center;
+    justify-content: space-around;
+    flex-basis: 100%;
+    height: 50%;
+    padding: 10px 40px 0;
+}
+#bloc-1 .texte
+{
+    flex-basis: 35%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-wrap: wrap;
+}
+#bloc-1 .texte h2
+{
+    font-family: 'Roboto', sans-serif;
+    flex-basis: 100%;
+    font-size: 35px;
+}
+#bloc-1 .img 
+{
+    flex-basis: 65%;
+    max-height: 80vh;
+}
+#bloc-1 .img img
+{
+    width: 100%;
+    height: 100%;
+    max-height: 100%;
+    max-width: 100%;
+}
+/*---------- ASIDE ---------------*/
+aside
+{
+    display: inline-block;
+    min-height: 100vh;
+    width: 20%;
+    background: #ff1a1a;
+    position: relative;
+    padding-top: 40px;
+}
+
+.user-img
+{
+    background: url('photo/user.png');
+    background-size: cover;
+    height: 120px;
+    width: 120px;
+    margin: 0 auto;
+}
+
+aside h2
+{
+    color: #fff;
+    text-align: center;
+    margin-bottom: 20px;
+}
+
+aside ul
+{
+    padding-left: 20px;
+}
+aside ul li, aside ul li a
+{
+    position: relative;
+    list-style: none;
+    margin-bottom: 15px;
+    font-size: 18px;
+    font-weight: bold; 
+    cursor: pointer;
+    text-decoration: none;
+    color: black;
+}
+
+nav input[type='checkbox'],.sous-menu,nav label #up
+{
+    display: none;
+}
+
+nav label
+{
+    position: absolute;
+    height: 20px;
+    width: 20px;
+    right: 10px;
+    cursor: pointer;
+}
+
+aside ul li img
+{
+    height: 30px;
+    width: 30px;
+    margin-right: 8px;
+    vertical-align: middle;
+}
+
+#down, #up
+{
+    height: 20px;
+    width: 20px;
+}
+
+.sous-menu
+{
+    margin-top: 15px;
+}
+
+.sous-menu li a
+{
+    font-size: 14px;
+    color: black;
+    text-decoration: none;
+}
+
+#petit
+{
+    font-size: 12px;
+}
+
+.sous-menu li img
+{
+    height: 20px;
+    width: 20px;
+}
+
+#down1:checked ~ .sous-menu,
+#down2:checked ~ .sous-menu,
+#down3:checked ~ .sous-menu,
+#down4:checked ~ .sous-menu,
+#down5:checked ~ .sous-menu,
+#down6:checked ~ .sous-menu
+{
+    display: block;
+}
+
+#down1:checked ~ label.nav-toggle #up,
+#down2:checked ~ label.nav-toggle #up,
+#down3:checked ~ label.nav-toggle #up,
+#down4:checked ~ label.nav-toggle #up,
+#down5:checked ~ label.nav-toggle #up,
+#down6:checked ~ label.nav-toggle #up
+{
+    display: block;
+}
+
+#down1:checked ~ label.nav-toggle #down,
+#down2:checked ~ label.nav-toggle #down,
+#down3:checked ~ label.nav-toggle #down,
+#down4:checked ~ label.nav-toggle #down,
+#down5:checked ~ label.nav-toggle #down,
+#down6:checked ~ label.nav-toggle #down
+{
+    display: none;
+}
+
+/*-----CORPS--------*/
+
+#corps
+{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width: 80%;
+}
+
+#corps form
+{
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-between;
+    width: 80%;
+    background: #D9D9D9;
+    padding: 20px;
+}
+
+#corps form h2
+{
+    flex-basis: 100%;
+    text-align: center;
+    margin-bottom: 20px;
+}
+
+#corps span, #corps input, #corps select
+{
+    flex-basis: 45%; /* occupe 45% de l'espace de son conteneur */
+    font-size: 16px;
+    outline: none;
+    margin-bottom: 10px; /* ajoute de l'espace entre chaque champ */
+}
+
+#corps span
+{
+    font-weight: bold;
+    margin-bottom: 4px;
+}
+
+#corps input, #corps select
+{
+    margin-bottom: 10px;
+    padding: 6px 4px;
+    text-transform: uppercase;
+}
+
+/*#corps input[type='submit']
+{
+    display: flex;
+    flex-basis: 100%;
+    background: #8C8C88;
+    border: 0;
+    padding: 0 auto;
+    margin-top: 20px;
+    cursor: pointer;
+}*/
+form #button
+{
+    margin-top: 20px;
+    display: block;
+    width: 100%;
+    height: 45px;
+    border-radius: 25px;
+}
+
+form #button #submit-btn
+{
+    display: block;
+    height: 100%;
+    width: 100%;
+    outline: none;
+    font-weight: bold;
+    letter-spacing: 1px;
+    border-radius: 10px;
+    border: 0;
+}
+
+form #button #submit-btn:hover
+{
+    background: brown;
+    border: 0;
+    transition: ease-out .5s;
+    color: white;
+}
+
+form small
+{
+    margin-bottom: 20px;
+    font-style: italic;
+}
+
+/*---------------ALERT--------------*/
+.alert
+{
+    background: white;
+    text-align: center;
+    padding: 30px 20px;
+    position: absolute;
+    top: 25%;
+    left: 33%;
+    bottom: 25%;
+    right: 33%;
+    border: 1px solid black;
+}
+#btn-alert
+{
+    display: none;
+}
+.alert img
+{
+    width: 100px;
+    height: 100px;
+}
+.alert a
+{
+    text-decoration: none;
+    color: black;
+    font-size: 16px;
+}
+.alert :nth-child(3)
+{
+    margin-bottom: 40PX;
+}
+
+/*Liste*/
+#corpsliste
+{
+    width: 80%;
+}
+
+#corpsliste form
+{
+    width: 100%;
+    display: flex;
+    justify-content: space-evenly;
+    align-items: center;
+    background: #D9D9D9;
+    padding: 20px;
+}
+
+#corpsliste select
+{
+    min-width: 100px;
+    text-align: left;
+    font-size: 16px;
+}
+
+#corpsliste table
+{
+    width: 95%;
+    margin-left: 20px;
+    border: 1px solid black;
+    border-collapse: collapse;
+    margin-top: 20px;
+}
+#corpsliste table thead
+{
+    text-align: center;
+    font-weight: bold;
+    background: #BFBAA8;
+}
+#corpsliste table td
+{
+    border: 1px solid black;
+    padding: 7px;
+}
+
+#corpsliste h1
+{
+    flex-basis: 100%;
+    text-align: center;
+    padding: 10px;
+    background:#D9D9D9;
+    font-size: 23px;
+}
